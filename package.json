@@ -2,8 +2,8 @@
   "name": "cypress-signalr-mock",
   "version": "0.0.1",
   "description": "An easy way to mock a SignalR server which can send and receive messages during Cypress tests.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "author": "JasonLandbridge",
+  "license": "ISC",
   "scripts": {
     "test": "test",
     "build": "tsc"
@@ -17,12 +17,25 @@
     "Cypress",
     "Mock"
   ],
-  "author": "JasonLandbridge",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/JasonLandbridge/cypress-signalr-mock/issues"
   },
   "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=14.17"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@microsoft/signalr": "^7.0.5"
   },
