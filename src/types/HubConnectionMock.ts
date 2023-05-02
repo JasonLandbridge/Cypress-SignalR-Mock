@@ -1,12 +1,29 @@
 import { Subject, Subscription } from "rxjs";
 import IPayload from "./IPayload";
-import { registerSubscriber } from "../lib";
 import { IMessageHub } from "./IMessageHub";
+import Log from "../log/log";
 
 export default class HubConnectionMock {
-  private _x: Subject<IPayload> = new Subject<IPayload>();
   private _subscriptions: Subscription[] = [];
   private _channels: IMessageHub[] = [];
+  public name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public publish(action: string, value: any): void {
+    const channels = this._channels.filter((x) => x.action === action);
+    if (channels.length === 0) {
+      Log.warn(`No subscribers for ${action}`);
+      return;
+    }
+    channels.forEach((x) => {
+      x.channel.next({ name: action, value });
+    });
+  }
+
+  // region Native SignalR methods
 
   /** Registers a handler that will be invoked when the hub method with the specified method name is invoked.
    *
@@ -29,6 +46,8 @@ export default class HubConnectionMock {
       this._subscriptions.push(subscription);
     }
   }
+
+  // endregion
 
   public invoke<T = any>(methodName: string, ...args: any[]): Promise<T> {
     return new Promise<T>((resolve) => {
