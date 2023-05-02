@@ -1,28 +1,13 @@
 import { Subject } from "rxjs";
 import HubConnectionMock from "./types/HubConnectionMock";
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
+import IMockData from "./types/IMockData";
 
 export function registerSubscriber(
   subject: Subject<any>,
   callback: (payload: any) => void
 ) {
   subject.subscribe(callback);
-}
-
-export function createCypressSignalrMock(
-  name: string,
-  config: {
-    debug: boolean;
-  }
-): HubConnection | null {
-  // @ts-ignore
-  if (window.Cypress) {
-    const mock = new HubConnectionMock(name);
-    getData().mocks.push(mock);
-    // @ts-ignore
-    return <HubConnection>mock;
-  }
-  return null;
 }
 
 export function setupData() {
@@ -33,7 +18,7 @@ export function setupData() {
   }
 }
 
-export function getData() {
+export function getData(): IMockData {
   setupData();
   return window["cypress-signalr-mock"];
 }

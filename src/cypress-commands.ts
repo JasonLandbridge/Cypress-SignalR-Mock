@@ -1,8 +1,5 @@
-// @ts-ignore
 import { getHubConnectionMock } from "./lib";
 import Log from "./log/log";
-
-/// <reference path="index.d.ts" />
 
 export function setupCypressCommands() {
   Cypress.Commands.add(
