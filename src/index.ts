@@ -7,6 +7,7 @@ import HubConnectionMock from "./types/HubConnectionMock";
 import { setupCypressCommands } from "./cypress-commands";
 import { getData } from "./lib";
 import IMockData from "./types/IMockData";
+import IServerInvoke from "./types/IServerInvoke";
 
 setupCypressCommands();
 
@@ -46,6 +47,13 @@ declare global {
         hubName: string,
         action: string,
         payload: any
+      ): Chainable<Subject>;
+
+      signalrVerify(
+        hubName: string,
+        action: string,
+        times: number,
+        callback?: (invokes: IServerInvoke[]) => void
       ): Chainable<Subject>;
 
       signalrPrintData(): Chainable<Subject>;
