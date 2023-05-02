@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/JasonLandbridge/cypress-signalr-mock/issues"
   },
-  "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme"
+  "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme",
+  "devDependencies": {
+    "cypress": "^12.11.0",
+    "rxjs": "^7.8.1",
+    "typescript": "^5.0.4"
+  }
 }
