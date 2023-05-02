@@ -15,14 +15,15 @@
   "keywords": [
     "SignalR",
     "Cypress",
-    "Mock"
+    "Mock",
+    "cypress-plugin"
   ],
   "bugs": {
     "url": "https://github.com/JasonLandbridge/cypress-signalr-mock/issues"
   },
   "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./src/index.d.ts",
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js"
@@ -37,9 +38,11 @@
     "dist"
   ],
   "dependencies": {
-    "@microsoft/signalr": "^7.0.5"
+    "@microsoft/signalr": "^7.0.5",
+    "debug": "^4.3.4"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
     "cypress": "^12.11.0",
     "prettier": "^2.8.8",
     "rxjs": "^7.8.1",
