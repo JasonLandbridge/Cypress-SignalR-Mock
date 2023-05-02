@@ -10,16 +10,7 @@ export function registerSubscriber(
   subject.subscribe(callback);
 }
 
-export function setupData() {
-  if (window["cypress-signalr-mock"] === undefined) {
-    window["cypress-signalr-mock"] = {
-      mocks: [],
-    };
-  }
-}
-
 export function getData(): IMockData {
-  setupData();
   return window["cypress-signalr-mock"];
 }
 

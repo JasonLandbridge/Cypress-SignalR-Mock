@@ -1,5 +1,5 @@
 import { getHubConnectionMock } from "./lib";
-import Log from "./log/log";
+import Log from "./log";
 
 export function setupCypressCommands() {
   Cypress.Commands.add(

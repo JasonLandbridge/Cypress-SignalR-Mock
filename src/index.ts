@@ -6,6 +6,7 @@ import { HubConnection } from "@microsoft/signalr";
 import HubConnectionMock from "./types/HubConnectionMock";
 import { setupCypressCommands } from "./cypress-commands";
 import { getData } from "./lib";
+import IMockData from "./types/IMockData";
 
 setupCypressCommands();
 
@@ -25,7 +26,20 @@ export function useCypressSignalRMock(
   return null;
 }
 
+/**
+ * Typings
+ */
+// Initialize the global object
+(<any>window)["cypress-signalr-mock"] = {
+  mocks: [],
+};
+
+// This cannot be in a index.d.ts file because it will not be loaded by Cypress
 declare global {
+  interface Window {
+    "cypress-signalr-mock": IMockData;
+  }
+
   namespace Cypress {
     interface Chainable<Subject = any> {
       signalrPublish(
