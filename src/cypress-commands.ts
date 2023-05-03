@@ -1,7 +1,7 @@
+/// <reference types="cypress" />
 import { getHubConnectionMock } from "./lib";
 import Log from "./log";
 import IServerInvoke from "./types/IServerInvoke";
-import { Cypress } from "local-cypress";
 import { isCypressRunning } from "./utils.ts";
 
 export function setupCypressCommands() {
@@ -10,6 +10,7 @@ export function setupCypressCommands() {
     return;
   }
 
+  // @ts-ignore
   Cypress.Commands.add(
     "signalrPublish",
     (hubName: string, action: string, payload: any) => {
@@ -23,6 +24,7 @@ export function setupCypressCommands() {
     }
   );
 
+  // @ts-ignore
   Cypress.Commands.add(
     "signalrVerify",
     (
@@ -41,6 +43,7 @@ export function setupCypressCommands() {
     }
   );
 
+  // @ts-ignore
   Cypress.Commands.add("signalrPrintData", () => {
     Log.debug("signalrPrintData");
     Log.info("signalrPrintData");

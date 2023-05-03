@@ -4,7 +4,6 @@ import IPayload from "./IPayload";
 import { IHubConnectionData } from "./IHubConnectionData";
 import IServerInvoke from "./IServerInvoke";
 import { IStreamResult, Subject as SignalrSubject } from "@microsoft/signalr";
-import { expect } from "local-cypress";
 
 /**
  * Mock implementation of HubConnection,
@@ -35,16 +34,18 @@ export default class HubConnectionMock {
     action: string,
     times: number = 1,
     callback?: (invokes: IServerInvoke[]) => void
-  ) {
+  ): boolean {
     const currentInvokes = this._serverInvokes.filter(
       (s) => s.action === action
     );
 
-    expect(currentInvokes.length).to.equal(times, `${action} not invoked`);
+    // expect(currentInvokes.length).to.equal(times, `${action} not invoked`);
 
     if (callback) {
       callback(currentInvokes);
     }
+
+    return currentInvokes.length === times;
   }
 
   // region Native SignalR methods
