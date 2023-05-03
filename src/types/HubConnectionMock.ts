@@ -94,6 +94,7 @@ export default class HubConnectionMock {
    * @param {any[]} args The arguments used to invoke the server method.
    * @returns {IStreamResult<T>} An object that yields results from the server as they are received.
    */
+  // @ts-ignore
   public stream<T = any>(methodName: string, ...args: any[]): IStreamResult<T> {
     methodName = methodName.toLowerCase();
 
@@ -200,6 +201,7 @@ export default class HubConnectionMock {
    *
    * @param {Function} callback The handler that will be invoked when the connection is closed. Optionally receives a single argument containing the error that caused the connection to close (if any).
    */
+  // @ts-ignore
   public onclose(callback: (error?: Error) => void): void {
     return;
   }
@@ -224,6 +226,7 @@ export default class HubConnectionMock {
    *
    * @param {Function} callback The handler that will be invoked when the connection starts reconnecting. Optionally receives a single argument containing the error that caused the connection to start reconnecting (if any).
    */
+  // @ts-ignore
   public onreconnecting(callback: (error?: Error) => void): void {
     return;
   }
@@ -232,6 +235,7 @@ export default class HubConnectionMock {
    *
    * @param {Function} callback The handler that will be invoked when the connection successfully reconnects.
    */
+  // @ts-ignore
   public onreconnected(callback: (connectionId?: string) => void): void {
     return;
   }
@@ -245,6 +249,7 @@ export default class HubConnectionMock {
    * @param {any[]} args The arguments used to invoke the server method.
    * @returns {Promise<void>} A Promise that resolves when the invocation has been successfully sent, or rejects with an error.
    */
+  // @ts-ignore
   public send(methodName: string, ...args: any[]): Promise<void> {
     return Promise.resolve();
   }

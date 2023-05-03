@@ -1,6 +1,5 @@
 import { Subject } from "rxjs";
 import HubConnectionMock from "./types/HubConnectionMock";
-import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import IMockData from "./types/IMockData";
 
 export function registerSubscriber(

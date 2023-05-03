@@ -18,6 +18,9 @@ export function useCypressSignalRMock(
   }
 ): HubConnection | null {
   // @ts-ignore
+  const debug = config?.debug || false;
+
+  // @ts-ignore
   if (window.Cypress) {
     const mock = new HubConnectionMock(name);
     getData().mocks.push(mock);
