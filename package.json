@@ -1,6 +1,6 @@
 {
   "name": "cypress-signalr-mock",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "An easy way to mock a SignalR server which can send and receive messages during Cypress tests.",
   "author": "JasonLandbridge",
   "license": "ISC",
@@ -10,11 +10,12 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test-watch": "vitest watch"
+    "test-watch": "vitest watch",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JasonLandbridge/cypress-signalr-mock.git"
+    "url": "https://github.com/JasonLandbridge/cypress-signalr-mock.git"
   },
   "keywords": [
     "SignalR",
@@ -44,6 +45,11 @@
   "files": [
     "dist"
   ],
+  "release": {
+    "branches": [
+      "master"
+    ]
+  },
   "peerDependencies": {
     "@microsoft/signalr": ">=6.0.0",
     "cypress": ">=10.0.0",
@@ -56,6 +62,7 @@
     "debug": "^4.3.4",
     "happy-dom": "^9.10.7",
     "prettier": "^2.8.8",
+    "semantic-release": "^21.0.2",
     "typescript": "^5.0.4",
     "vite": "^4.3.2",
     "vite-plugin-dts": "^2.3.0",
