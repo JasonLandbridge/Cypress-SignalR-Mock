@@ -4,9 +4,11 @@
   "description": "An easy way to mock a SignalR server which can send and receive messages during Cypress tests.",
   "author": "JasonLandbridge",
   "license": "ISC",
+  "type": "module",
   "scripts": {
-    "test": "test",
-    "build": "tsc"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -22,11 +24,14 @@
     "url": "https://github.com/JasonLandbridge/cypress-signalr-mock/issues"
   },
   "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme",
-  "type": "module",
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
   "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    }
   },
   "engines": {
     "node": ">=14.17"
@@ -37,15 +42,19 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@microsoft/signalr": "^7.0.5",
-    "debug": "^4.3.4"
+  "peerDependencies": {
+    "@microsoft/signalr": ">=6.0.0",
+    "cypress": ">=10.0.0",
+    "rxjs": ">=6.6.0 <8"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
-    "cypress": "^12.11.0",
+    "@types/node": "^18.16.3",
+    "debug": "^4.3.4",
     "prettier": "^2.8.8",
-    "rxjs": "^7.8.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "vite": "^4.3.2",
+    "vite-plugin-dts": "^2.3.0",
+    "vitest": "^0.30.1"
   }
 }

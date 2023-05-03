@@ -1,17 +1,30 @@
 {
   "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
     "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "node",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true, /* Skip type checking of declaration files. */
+
     "sourceMap": true,
-    "strict": true,
     "incremental": true, /* Enable incremental compilation */
     "esModuleInterop": true, /* Enables intero between CommonJS and ES */
-    "skipLibCheck": true, /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently */
     "allowSyntheticDefaultImports": true,
     "declaration": true,  /* Concatenate & emit output to single file.*/
     "outDir": "./dist",
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    /* Types */
     "types": ["cypress", "node"]
   },
   "files": ["src/index.ts"],
