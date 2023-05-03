@@ -4,6 +4,7 @@ import IPayload from "./IPayload";
 import { IHubConnectionData } from "./IHubConnectionData";
 import IServerInvoke from "./IServerInvoke";
 import { IStreamResult, Subject as SignalrSubject } from "@microsoft/signalr";
+import { expect } from "local-cypress";
 
 /**
  * Mock implementation of HubConnection,

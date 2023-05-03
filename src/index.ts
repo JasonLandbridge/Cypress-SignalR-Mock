@@ -8,6 +8,7 @@ import { setupCypressCommands } from "./cypress-commands";
 import { getData } from "./lib";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
+import { isCypressRunning } from "./utils.ts";
 
 setupCypressCommands();
 
@@ -20,14 +21,13 @@ export function useCypressSignalRMock(
   // @ts-ignore
   const debug = config?.debug || false;
 
-  // @ts-ignore
-  if (window.Cypress) {
-    const mock = new HubConnectionMock(name);
-    getData().mocks.push(mock);
-    // @ts-ignore
-    return <HubConnection>mock;
+  if (!isCypressRunning()) {
+    return null;
   }
-  return null;
+
+  const mock = new HubConnectionMock(name);
+  getData().mocks.push(mock);
+  return <HubConnection>(mock as unknown);
 }
 
 /**

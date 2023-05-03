@@ -1,8 +1,15 @@
 import { getHubConnectionMock } from "./lib";
 import Log from "./log";
 import IServerInvoke from "./types/IServerInvoke";
+import { Cypress } from "local-cypress";
+import { isCypressRunning } from "./utils.ts";
 
 export function setupCypressCommands() {
+  if (!isCypressRunning()) {
+    Log.info("Cypress is not running, skipping setup of Cypress commands");
+    return;
+  }
+
   Cypress.Commands.add(
     "signalrPublish",
     (hubName: string, action: string, payload: any) => {
