@@ -1,6 +1,6 @@
 # Cypress-SignalR-Mock
 
-Mock SignalR hub connections in Cypress E2E tests.
+Easy Mock SignalR hub connections in Cypress E2E tests.
 
 ## Features
 
