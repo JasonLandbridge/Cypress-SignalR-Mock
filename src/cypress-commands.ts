@@ -11,37 +11,10 @@ export function setupCypressCommands() {
   }
 
   // @ts-ignore
-  Cypress.Commands.add(
-    "signalrPublish",
-    (hubName: string, action: string, payload: any) => {
-      const hubConnectionMock = getHubConnectionMock(hubName);
-      if (!hubConnectionMock) {
-        throw new Error(
-          `signalrPublish - HubConnectionMock not found for ${hubName}`
-        );
-      }
-      hubConnectionMock.publish(action, payload);
-    }
-  );
+  Cypress.Commands.add("hubPublish", hubPublish);
 
   // @ts-ignore
-  Cypress.Commands.add(
-    "signalrVerify",
-    (
-      hubName: string,
-      action: string,
-      times: number = 1,
-      callback?: (invokes: IServerInvoke[]) => void
-    ) => {
-      const hubConnectionMock = getHubConnectionMock(hubName);
-      if (!hubConnectionMock) {
-        throw new Error(
-          `signalrVerify - HubConnectionMock not found for ${hubName}`
-        );
-      }
-      hubConnectionMock.verify(action, times, callback);
-    }
-  );
+  Cypress.Commands.add("hubVerify", hubVerify);
 
   // @ts-ignore
   Cypress.Commands.add("signalrPrintData", () => {
@@ -50,4 +23,27 @@ export function setupCypressCommands() {
     Log.warn("signalrPrintData");
     Log.error("signalrPrintData");
   });
+}
+
+export function hubPublish(hubName: string, action: string, payload: any) {
+  const hubConnectionMock = getHubConnectionMock(hubName);
+  if (!hubConnectionMock) {
+    Log.error(`[cy.hubPublish] - HubConnectionMock not found for ${hubName}`);
+    return;
+  }
+  hubConnectionMock.publish(action, payload);
+}
+
+export function hubVerify(
+  hubName: string,
+  action: string,
+  times: number = 1,
+  callback?: (invokes: IServerInvoke[]) => void
+) {
+  const hubConnectionMock = getHubConnectionMock(hubName);
+  if (!hubConnectionMock) {
+    Log.error(`[cy.hubVerify] - HubConnectionMock not found for ${hubName}`);
+    return;
+  }
+  hubConnectionMock.verify(action, times, callback);
 }

@@ -15,7 +15,11 @@ export default class Log {
     console.warn(this._prefix + message);
   }
 
-  public static error(message: string) {
-    console.error(this._prefix + message);
+  public static error(message: string, throwError: boolean = true) {
+    if (throwError) {
+      throw new Error(this._prefix + message);
+    } else {
+      console.error(this._prefix + message);
+    }
   }
 }

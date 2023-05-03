@@ -46,13 +46,13 @@ declare global {
 
   namespace Cypress {
     interface Chainable<Subject = any> {
-      signalrPublish(
+      hubPublish(
         hubName: string,
         action: string,
         payload: any
       ): Chainable<Subject>;
 
-      signalrVerify(
+      hubVerify(
         hubName: string,
         action: string,
         times: number,
