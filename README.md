@@ -1,11 +1,24 @@
 # Cypress-SignalR-Mock
 
+Mock SignalR hub connections in Cypress E2E tests.
+
 ## Features
 
-- Mocks signals from and to the SignalR hub in the back-end!
+- Provides Cypress commands to publish and verify messages from and to the SignalR hub!
 - No replacement of the Socket object on the window object!
 - Multiple hubs can be mocked at the same time!
 - Full TypeScript support!
+- Provides mock support for all public HubConnection methods!
+
+## Compatibility
+
+The below are not hard requirements, but the plugin is tested against these versions.
+
+- Cypress 10.0.0 or higher
+- SignalR 6.0.0 or higher
+- TypeScript 4.0.0 or higher
+- RxJS 6.6.0 or higher
+- Node 12.0.0 or higher
 
 ## Install
 
@@ -19,6 +32,12 @@ Install with yarn:
 
 ```bash
 yarn add cypress-signalr-mock --dev
+```
+
+Install with pnpm:
+
+```bash
+pnpm add -D cypress-signalr-mock
 ```
 
 ## Usage
@@ -56,6 +75,22 @@ when the `createCypressSignalrMock` function is called. The observable is then u
 ### From Server to Client
 
 ### From Client to Server
+
+## Limitations
+
+- Multiple listeners for the same message type are not supported
+
+```typescript
+// This will not work
+
+```
+
+- The `hubConnection.on` and `hubConnection.stream` cannot have the same message type name.
+
+```typescript
+// This will not work
+
+```
 
 ## Contributing
 

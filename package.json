@@ -45,17 +45,15 @@
   "files": [
     "dist"
   ],
-  "release": {
-    "branches": [
-      "master"
-    ]
-  },
   "peerDependencies": {
     "@microsoft/signalr": ">=6.0.0",
     "cypress": ">=10.0.0",
     "rxjs": ">=6.6.0 <8"
   },
   "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.7",
+    "@semantic-release/npm": "^10.0.3",
     "@types/debug": "^4.1.7",
     "@types/node": "^18.16.3",
     "@vitest/coverage-c8": "^0.30.1",
