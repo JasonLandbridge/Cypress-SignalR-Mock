@@ -1,14 +1,20 @@
+import { defineConfig } from "vitest/config";
 import { resolve } from "path";
-import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-// https://vitejs.dev/guide/build.html#library-mode
+
 export default defineConfig({
   build: {
+    outDir: "dist",
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "cypress-signalr-mock",
-      fileName: "cypress-signalr-mock",
     },
   },
   plugins: [dts()],
+  test: {
+    environment: "happy-dom",
+    include: ["tests/*.test.ts"],
+    unstubGlobals: true,
+  },
 });

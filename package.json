@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -24,13 +25,13 @@
     "url": "https://github.com/JasonLandbridge/cypress-signalr-mock/issues"
   },
   "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme",
-  "main": "./dist/my-lib.umd.cjs",
-  "module": "./dist/my-lib.js",
+  "main": "./dist/cypress-signalr-mock.umd.cjs",
+  "module": "./dist/cypress-signalr-mock.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.js",
-      "require": "./dist/my-lib.umd.cjs"
+      "import": "./dist/cypress-signalr-mock.js",
+      "require": "./dist/cypress-signalr-mock.umd.cjs"
     }
   },
   "engines": {
@@ -51,6 +52,8 @@
     "@types/debug": "^4.1.7",
     "@types/node": "^18.16.3",
     "debug": "^4.3.4",
+    "happy-dom": "^9.10.7",
+    "local-cypress": "^1.2.6",
     "prettier": "^2.8.8",
     "typescript": "^5.0.4",
     "vite": "^4.3.2",
