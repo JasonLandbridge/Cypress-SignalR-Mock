@@ -19,6 +19,8 @@ export default class HubConnectionMock {
   }
 
   public publish(action: string, value: any): void {
+    action = action.toLowerCase();
+
     const channels = this._hubConnectionData.filter((x) => x.action === action);
     if (channels.length === 0) {
       Log.warn(`No subscribers for ${action}`);
@@ -35,11 +37,14 @@ export default class HubConnectionMock {
     times: number = 1,
     callback?: (invokes: IServerInvoke[]) => void
   ): boolean {
+    action = action.toLowerCase();
+
     const currentInvokes = this._serverInvokes.filter(
       (s) => s.action === action
     );
 
-    // expect(currentInvokes.length).to.equal(times, `${action} not invoked`);
+    // @ts-ignore
+    expect(currentInvokes.length).to.equal(times, `${action} was not invoked`);
 
     if (callback) {
       callback(currentInvokes);

@@ -1,8 +1,11 @@
 /// <reference types="cypress" />
-import { getHubConnectionMock } from "./lib";
 import Log from "./log";
 import IServerInvoke from "./types/IServerInvoke";
-import { isCypressRunning } from "./utils.ts";
+import {
+  getCypressSignalrMockData,
+  getHubConnectionMock,
+  isCypressRunning,
+} from "./utils.ts";
 
 export function setupCypressCommands() {
   if (!isCypressRunning()) {
@@ -17,12 +20,7 @@ export function setupCypressCommands() {
   Cypress.Commands.add("hubVerify", hubVerify);
 
   // @ts-ignore
-  Cypress.Commands.add("signalrPrintData", () => {
-    Log.debug("signalrPrintData");
-    Log.info("signalrPrintData");
-    Log.warn("signalrPrintData");
-    Log.error("signalrPrintData");
-  });
+  Cypress.Commands.add("hubPrintData", hubPrintData);
 }
 
 export function hubPublish(hubName: string, action: string, payload: any) {
@@ -46,4 +44,11 @@ export function hubVerify(
     return;
   }
   hubConnectionMock.verify(action, times, callback);
+}
+
+export function hubPrintData() {
+  Log.info(
+    'Current window["cypress-signalr-mock"] data:',
+    getCypressSignalrMockData()
+  );
 }

@@ -7,8 +7,8 @@ export default class Log {
     debug("cypress-signalr-mock")(message);
   }
 
-  public static info(message: string) {
-    console.info(this._prefix + message);
+  public static info(message: string, value: any = undefined) {
+    console.info(this._prefix + message, value);
   }
 
   public static warn(message: string) {

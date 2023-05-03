@@ -5,10 +5,9 @@
 import { HubConnection } from "@microsoft/signalr";
 import HubConnectionMock from "./types/HubConnectionMock";
 import { setupCypressCommands } from "./cypress-commands";
-import { getData } from "./lib";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
-import { isCypressRunning } from "./utils.ts";
+import { getCypressSignalrMockData, isCypressRunning } from "./utils.ts";
 
 setupCypressCommands();
 
@@ -26,7 +25,7 @@ export function useCypressSignalRMock(
   }
 
   const mock = new HubConnectionMock(name);
-  getData().mocks.push(mock);
+  getCypressSignalrMockData().mocks.push(mock);
   return <HubConnection>(mock as unknown);
 }
 
@@ -59,7 +58,7 @@ declare global {
         callback?: (invokes: IServerInvoke[]) => void
       ): Chainable<Subject>;
 
-      signalrPrintData(): Chainable<Subject>;
+      hubPrintData(): Chainable<Subject>;
     }
   }
 }
