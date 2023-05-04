@@ -24,12 +24,7 @@ export function useCypressSignalRMock(name: string): HubConnection | null {
 /**
  * Typings
  */
-// Initialize the global object
-(<any>window)["cypress-signalr-mock"] = {
-  mocks: [],
-};
-
-// This cannot be in a index.d.ts file because it will not be loaded by Cypress
+// This cannot be in a index.d.ts file otherwise it will not be loaded in by Cypress
 declare global {
   interface Window {
     "cypress-signalr-mock": IMockData;
