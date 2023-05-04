@@ -3,7 +3,7 @@ export interface IHubConnectionData {
     /**
      * The name of the SignalR action to subscribe to.
      */
-    action: string;
+    messageType: string;
     /**
      * The subject to publish to when the hub connection has received a message.
      */
