@@ -25,18 +25,18 @@ export function setupCypressCommands() {
   cypress.Commands.add("hubPrintData", hubPrintData);
 }
 
-export function hubPublish(hubName: string, action: string, payload: any) {
+export function hubPublish(hubName: string, messageType: string, payload: any) {
   const hubConnectionMock = getHubConnectionMock(hubName);
   if (!hubConnectionMock) {
     Log.error(`[cy.hubPublish] - HubConnectionMock not found for ${hubName}`);
     return;
   }
-  hubConnectionMock.publish(action, payload);
+  hubConnectionMock.publish(messageType, payload);
 }
 
 export function hubVerify(
   hubName: string,
-  action: string,
+  messageType: string,
   times: number = 1,
   callback?: (invokes: IServerInvoke[]) => void
 ) {
@@ -45,7 +45,7 @@ export function hubVerify(
     Log.error(`[cy.hubVerify] - HubConnectionMock not found for ${hubName}`);
     return;
   }
-  hubConnectionMock.verify(action, times, callback);
+  hubConnectionMock.verify(messageType, times, callback);
 }
 
 export function hubPrintData() {

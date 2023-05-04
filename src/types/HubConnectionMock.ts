@@ -18,17 +18,21 @@ export default class HubConnectionMock {
     this.name = name;
   }
 
-  public publish(action: string, value: any): void {
-    action = action.toLowerCase();
+  public publish(messageType: string, value: any): void {
+    messageType = messageType.toLowerCase();
 
-    const channels = this._hubConnectionData.filter((x) => x.action === action);
+    const channels = this._hubConnectionData.filter(
+      (x) => x.messageType === messageType
+    );
     if (channels.length === 0) {
-      Log.warn(`No subscribers for ${action}`);
+      Log.warn(`No subscribers for ${messageType}`);
       return;
     }
-    Log.debug(`Publishing action: ${action} to ${channels.length} subscribers`);
+    Log.debug(
+      `Publishing action: ${messageType} to ${channels.length} subscribers`
+    );
     channels.forEach((x) => {
-      x.channel.next({ name: action, value });
+      x.channel.next({ name: messageType, value });
     });
   }
 
@@ -40,7 +44,7 @@ export default class HubConnectionMock {
     messageType = messageType.toLowerCase();
 
     const currentInvokes = this._serverInvokes.filter(
-      (s) => s.action === action
+      (s) => s.action === messageType
     );
 
     // @ts-ignore
