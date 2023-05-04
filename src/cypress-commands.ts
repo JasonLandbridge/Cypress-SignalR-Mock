@@ -14,13 +14,15 @@ export function setupCypressCommands() {
   }
 
   // @ts-ignore
-  Cypress.Commands.add("hubPublish", hubPublish);
+  const cypress = window.Cypress;
 
-  // @ts-ignore
-  Cypress.Commands.add("hubVerify", hubVerify);
+  cypress.Commands.add("hubPublish", hubPublish);
 
-  // @ts-ignore
-  Cypress.Commands.add("hubPrintData", hubPrintData);
+  cypress.Commands.add("hubVerifyInvokes", hubVerify);
+
+  cypress.Commands.add("hubClear", hubClear);
+
+  cypress.Commands.add("hubPrintData", hubPrintData);
 }
 
 export function hubPublish(hubName: string, action: string, payload: any) {
