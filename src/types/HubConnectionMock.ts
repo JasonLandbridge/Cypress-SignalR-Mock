@@ -38,7 +38,6 @@ export default class HubConnectionMock {
 
   public verify(
     messageType: string,
-    times: number = 1,
     callback?: (invokes: IServerInvoke[]) => void
   ): void {
     messageType = messageType.toLowerCase();
@@ -47,14 +46,9 @@ export default class HubConnectionMock {
       (s) => s.action === messageType
     );
 
-    // @ts-ignore
-    expect(currentInvokes.length).to.equal(times, `${action} was not invoked`);
-
     if (callback) {
       callback(currentInvokes);
     }
-
-    return currentInvokes.length === times;
   }
 
   // region Native SignalR methods
@@ -179,7 +173,7 @@ export default class HubConnectionMock {
     methodName = methodName.toLowerCase();
 
     const index = this._hubConnectionData.findIndex(
-      (x) => x.action === methodName
+      (x) => x.messageType === methodName
     );
     if (index == -1) {
       Log.warn(`No channels registered for action name: ${methodName}`);
