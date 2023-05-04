@@ -48,13 +48,11 @@ declare global {
        * Verifies that a message was sent from the Client => Server
        * @param hubName The name of the hub
        * @param messageType The name of the message type
-       * @param times The number of times the message should have been sent
        * @param callback A callback function that will be called with the invokes
        */
       hubVerifyInvokes(
         hubName: string,
         messageType: string,
-        times: number,
         callback?: (invokes: IServerInvoke[]) => void
       ): Chainable<Subject>;
 

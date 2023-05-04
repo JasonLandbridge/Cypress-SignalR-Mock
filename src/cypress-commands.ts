@@ -38,7 +38,6 @@ export function hubPublish(hubName: string, messageType: string, payload: any) {
 export function hubVerify(
   hubName: string,
   messageType: string,
-  times: number = 1,
   callback?: (invokes: IServerInvoke[]) => void
 ) {
   const hubConnectionMock = getHubConnectionMock(hubName);
@@ -46,7 +45,7 @@ export function hubVerify(
     Log.error(`[cy.hubVerify] - HubConnectionMock not found for ${hubName}`);
     return;
   }
-  hubConnectionMock.verify(messageType, times, callback);
+  hubConnectionMock.verify(messageType, callback);
 }
 
 export function hubPrintData() {
