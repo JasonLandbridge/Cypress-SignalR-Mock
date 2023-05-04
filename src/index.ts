@@ -11,15 +11,7 @@ import { getCypressSignalrMockData, isCypressRunning } from "./utils.ts";
 
 setupCypressCommands();
 
-export function useCypressSignalRMock(
-  name: string,
-  config?: {
-    debug: boolean;
-  }
-): HubConnection | null {
-  // @ts-ignore
-  const debug = config?.debug || false;
-
+export function useCypressSignalRMock(name: string): HubConnection | null {
   if (!isCypressRunning()) {
     return null;
   }
