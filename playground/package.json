@@ -6,12 +6,18 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "cypress:open": "npx cypress open --e2e --browser chromium --env BASE_URL=http://localhost:3030",
+    "cypress:e2e": "start-server-and-test 'nuxi dev --port 3030' http://localhost:3030 cypress:open"
   },
   "devDependencies": {
     "@types/node": "^18",
     "cypress": "^12.11.0",
     "nuxt": "^3.4.3",
+    "start-server-and-test": "^2.0.0",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@microsoft/signalr": "^7.0.5"
   }
 }
