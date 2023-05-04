@@ -7,10 +7,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest run",
     "test-watch": "vitest watch",
+    "test-coverage": "vitest coverage",
+    "type-check": "tsc --noEmit",
     "semantic-release": "semantic-release"
   },
   "repository": {
