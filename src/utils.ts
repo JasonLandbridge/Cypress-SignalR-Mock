@@ -1,6 +1,5 @@
 import HubConnectionMock from "./types/HubConnectionMock.ts";
 import IMockData from "./types/IMockData.ts";
-import Log from "./log.ts";
 
 export function isCypressRunning(): boolean {
   return window.hasOwnProperty("Cypress");
