@@ -33,11 +33,11 @@ export default class HubConnectionMock {
   }
 
   public verify(
-    action: string,
+    messageType: string,
     times: number = 1,
     callback?: (invokes: IServerInvoke[]) => void
-  ): boolean {
-    action = action.toLowerCase();
+  ): void {
+    messageType = messageType.toLowerCase();
 
     const currentInvokes = this._serverInvokes.filter(
       (s) => s.action === action
@@ -65,9 +65,9 @@ export default class HubConnectionMock {
     methodName = methodName.toLowerCase();
 
     // Create if it doesn't exist yet
-    if (!this._hubConnectionData.some((x) => x.action === methodName)) {
+    if (!this._hubConnectionData.some((x) => x.messageType === methodName)) {
       this._hubConnectionData.push({
-        action: methodName,
+        messageType: methodName,
         isStream: false,
         channel: new Subject<any>(),
         subscriptions: [],
@@ -76,7 +76,7 @@ export default class HubConnectionMock {
 
     // Find the connection data
     let connectionData = this._hubConnectionData.find(
-      (x) => x.action === methodName
+      (x) => x.messageType === methodName
     );
 
     if (!connectionData) {
@@ -106,9 +106,9 @@ export default class HubConnectionMock {
     methodName = methodName.toLowerCase();
 
     // Create if it doesn't exist yet
-    if (!this._hubConnectionData.some((x) => x.action === methodName)) {
+    if (!this._hubConnectionData.some((x) => x.messageType === methodName)) {
       this._hubConnectionData.push({
-        action: methodName,
+        messageType: methodName,
         isStream: true,
         channel: new Subject<T>(),
         subscriptions: [],
@@ -117,7 +117,7 @@ export default class HubConnectionMock {
 
     // Find the connection data
     let connectionData = this._hubConnectionData.find(
-      (x) => x.action === methodName
+      (x) => x.messageType === methodName
     );
 
     if (!connectionData) {

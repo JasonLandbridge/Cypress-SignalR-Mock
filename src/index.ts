@@ -37,19 +37,40 @@ declare global {
 
   namespace Cypress {
     interface Chainable<Subject = any> {
+      /**
+       * Simulates a message sent from the Server => Client
+       * @param hubName The name of the hub
+       * @param messageType The name of the message type
+       * @param payload The payload to send with the action
+       */
       hubPublish(
         hubName: string,
-        action: string,
+        messageType: string,
         payload: any
       ): Chainable<Subject>;
 
-      hubVerify(
+      /**
+       * Verifies that a message was sent from the Client => Server
+       * @param hubName The name of the hub
+       * @param messageType The name of the message type
+       * @param times The number of times the message should have been sent
+       * @param callback A callback function that will be called with the invokes
+       */
+      hubVerifyInvokes(
         hubName: string,
-        action: string,
+        messageType: string,
         times: number,
         callback?: (invokes: IServerInvoke[]) => void
       ): Chainable<Subject>;
 
+      /**
+       * Clears all data from the window["cypress-signalr-mock"] object
+       */
+      hubClear(): Chainable<Subject>;
+
+      /**
+       * Prints the current data to console in the window["cypress-signalr-mock"] object
+       */
       hubPrintData(): Chainable<Subject>;
     }
   }
