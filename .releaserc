@@ -31,6 +31,13 @@
       }
     ],
     "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "Cypress SignalR Mock"
+      }
+    ],
     "@semantic-release/npm",
     [
       "@semantic-release/git",
