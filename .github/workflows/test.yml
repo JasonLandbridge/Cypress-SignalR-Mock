@@ -22,8 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: NPM Clean Install
-      - run: npm ci
+        run: npm ci
       - name: Execute Unit tests
-      - run: npm run test
+        run: npm run test
       - name: Execute Typechecking
-      - run: npm run type-check
+        run: npm run type-check
