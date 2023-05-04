@@ -2,6 +2,7 @@
 import Log from "./log";
 import IServerInvoke from "./types/IServerInvoke";
 import {
+  clearCypressSignalrMockData,
   getCypressSignalrMockData,
   getHubConnectionMock,
   isCypressRunning,
@@ -53,4 +54,8 @@ export function hubPrintData() {
     'Current window["cypress-signalr-mock"] data:',
     getCypressSignalrMockData()
   );
+}
+
+export function hubClear() {
+  clearCypressSignalrMockData();
 }

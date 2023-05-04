@@ -10,9 +10,23 @@ export function getCypressSignalrMockData(): IMockData {
   if (window.hasOwnProperty("cypress-signalr-mock")) {
     return window["cypress-signalr-mock"];
   }
-  // This throws an error in the Cypress console
-  Log.error('window["cypress-signalr-mock"] is not initialized.');
-  return {} as IMockData;
+  // Initialize the global object
+  clearCypressSignalrMockData();
+  return getCypressSignalrMockData();
+}
+
+export function setCypressSignalrMockData(value: IMockData): void {
+  window["cypress-signalr-mock"] = value;
+}
+
+export function clearCypressSignalrMockData(): void {
+  setCypressSignalrMockData(defaultCypressSignalrMockData());
+}
+
+export function defaultCypressSignalrMockData(): IMockData {
+  return {
+    mocks: [],
+  };
 }
 
 export function getHubConnectionMock(
