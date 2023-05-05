@@ -18,6 +18,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@microsoft/signalr": "^7.0.5"
+    "@microsoft/signalr": "^7.0.5",
+    "cypress-signalr-mock": "file:../dist"
   }
 }
