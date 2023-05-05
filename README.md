@@ -14,6 +14,7 @@ Easy way to publish messages from and to your SignalR hubs in Cypress E2E tests.
 - [Usage](#usage)
 - [How does it work](#how-does-it-work)
 - [Contributing](#contributing)
+- [Credits](#credits)
 
 ## Features
 
