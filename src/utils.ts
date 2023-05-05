@@ -9,11 +9,8 @@ export function isCypressRunning(): boolean {
   return window.hasOwnProperty("Cypress");
 }
 
-export function getCypressSignalrMockData(): IMockData | null {
-  if (isSSR()) {
-    return null;
-  }
-  if (window["cypress-signalr-mock"]) {
+export function getCypressSignalrMockData(): IMockData {
+  if (!isSSR() && window["cypress-signalr-mock"]) {
     return window["cypress-signalr-mock"];
   }
   // Initialize the global object
@@ -42,7 +39,7 @@ export function getHubConnectionMock(
   hubName: string
 ): HubConnectionMock | null {
   const data = getCypressSignalrMockData();
-  return data?.mocks.find((x) => x.name === hubName) ?? null;
+  return data.mocks.find((x) => x.name === hubName) ?? null;
 }
 
 export function isSSR(): boolean {
