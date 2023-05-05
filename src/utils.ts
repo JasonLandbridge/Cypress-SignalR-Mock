@@ -1,12 +1,19 @@
 import HubConnectionMock from "./types/HubConnectionMock.ts";
 import IMockData from "./types/IMockData.ts";
+import Log from "./log.ts";
 
 export function isCypressRunning(): boolean {
+  if (isSSR()) {
+    return false;
+  }
   return window.hasOwnProperty("Cypress");
 }
 
-export function getCypressSignalrMockData(): IMockData {
-  if (window.hasOwnProperty("cypress-signalr-mock")) {
+export function getCypressSignalrMockData(): IMockData | null {
+  if (isSSR()) {
+    return null;
+  }
+  if (window["cypress-signalr-mock"]) {
     return window["cypress-signalr-mock"];
   }
   // Initialize the global object
@@ -15,6 +22,9 @@ export function getCypressSignalrMockData(): IMockData {
 }
 
 export function setCypressSignalrMockData(value: IMockData): void {
+  if (isSSR()) {
+    return;
+  }
   window["cypress-signalr-mock"] = value;
 }
 
@@ -31,7 +41,16 @@ export function defaultCypressSignalrMockData(): IMockData {
 export function getHubConnectionMock(
   hubName: string
 ): HubConnectionMock | null {
-  return (
-    getCypressSignalrMockData().mocks.find((x) => x.name === hubName) || null
-  );
+  const data = getCypressSignalrMockData();
+  return data?.mocks.find((x) => x.name === hubName) ?? null;
+}
+
+export function isSSR(): boolean {
+  if (!window) {
+    Log.error(
+      "window is not defined. This most likely happens during SSR, which is not supported,"
+    );
+    return true;
+  }
+  return false;
 }
