@@ -42,7 +42,9 @@ export function hubVerify(
 ) {
   const hubConnectionMock = getHubConnectionMock(hubName);
   if (!hubConnectionMock) {
-    Log.error(`[cy.hubVerify] - HubConnectionMock not found for ${hubName}`);
+    Log.error(
+      `[cy.hubVerify] - HubConnectionMock not found for hub with name: ${hubName}`
+    );
     return;
   }
   hubConnectionMock.verify(messageType, callback);
