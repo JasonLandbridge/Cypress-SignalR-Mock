@@ -6,3 +6,4 @@ export declare function setCypressSignalrMockData(value: IMockData): void;
 export declare function clearCypressSignalrMockData(): void;
 export declare function defaultCypressSignalrMockData(): IMockData;
 export declare function getHubConnectionMock(hubName: string): HubConnectionMock | null;
+export declare function isSSR(): boolean;
