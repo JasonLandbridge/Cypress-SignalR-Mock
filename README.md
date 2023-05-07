@@ -136,7 +136,9 @@ const progressHubConnection1 = useCypressSignalRMock('progress') ??
 
 const progressHubConnection2 = useCypressSignalRMock('progress') ??
     new HubConnectionBuilder().withUrl(`http://localhost:3000/progress2`).build();
+```
 
+```typescript
 // This will work
 const cypressMock = useCypressSignalRMock('progress');
 const progressHubConnection1 = cypressMock ??
