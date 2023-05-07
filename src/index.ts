@@ -8,12 +8,21 @@ import { setupCypressCommands } from "./cypress-commands";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
 import { getCypressSignalrMockData, isCypressRunning } from "./utils.ts";
+import Log from "./log.ts";
 
 setupCypressCommands();
+useCypressSignalRMock("default");
 
-export function useCypressSignalRMock(name: string): HubConnection | null {
+export function useCypressSignalRMock(
+  name: string,
+  { debug }: Partial<{ debug?: boolean }> = {}
+): HubConnection | null {
   if (!isCypressRunning()) {
     return null;
+  }
+
+  if (debug) {
+    Log.setLogLevel(4);
   }
 
   const mock = new HubConnectionMock(name);
