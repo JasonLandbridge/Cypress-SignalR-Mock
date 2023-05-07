@@ -10,7 +10,7 @@ import {
 
 export function setupCypressCommands() {
   if (!isCypressRunning()) {
-    Log.info("Cypress is not running, skipping setup of Cypress commands");
+    Log.debug("Cypress is not running, skipping setup of Cypress commands");
     return;
   }
 
