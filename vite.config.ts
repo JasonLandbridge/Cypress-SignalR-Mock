@@ -12,6 +12,7 @@ export default defineConfig({
       fileName: "index",
     },
   },
+  // A vite plugin that generates declaration files
   plugins: [dts()],
   test: {
     environment: "happy-dom",
