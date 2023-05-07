@@ -1,7 +1,9 @@
 import { HubConnection } from "@microsoft/signalr";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
-export declare function useCypressSignalRMock(name: string): HubConnection | null;
+export declare function useCypressSignalRMock(name: string, { debug }?: Partial<{
+    debug?: boolean;
+}>): HubConnection | null;
 /**
  * Typings
  */
