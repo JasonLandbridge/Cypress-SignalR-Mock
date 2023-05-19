@@ -733,9 +733,9 @@ function J(e) {
   return S().mocks.find((t) => t.name === e) ?? null;
 }
 function T() {
-  return window ? !1 : (a.error(
+  return typeof window < "u" ? (a.error(
     "window is not defined. This most likely happens during SSR, which is not supported,"
-  ), !0);
+  ), !0) : !1;
 }
 function hr() {
   if (!q()) {
