@@ -43,9 +43,10 @@ export function getHubConnectionMock(
 }
 
 export function isSSR(): boolean {
-  if (typeof window !== "undefined") {
+  if (typeof window === "undefined") {
     Log.error(
-      "window is not defined. This most likely happens during SSR, which is not supported,"
+      "window is not defined. This most likely happens during SSR, which is not supported",
+      false
     );
     return true;
   }
