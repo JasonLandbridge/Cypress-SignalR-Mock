@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/node": "^18",
     "cypress": "^12.11.0",
-    "nuxt": "^3.4.3",
+    "nuxt": "^3.5.0",
     "start-server-and-test": "^2.0.0",
     "typescript": "^5.0.4"
   },
