@@ -7,3 +7,4 @@ export declare function clearCypressSignalrMockData(): void;
 export declare function defaultCypressSignalrMockData(): IMockData;
 export declare function getHubConnectionMock(hubName: string): HubConnectionMock | null;
 export declare function isSSR(): boolean;
+export declare function isInVitestMode(): boolean;
