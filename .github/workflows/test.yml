@@ -31,5 +31,4 @@ jobs:
         with:
           build: npm ci && npm run build
           start: npm run cypress:ci
-          wait-on: 'http://localhost:3030'
           working-directory: ./playground
