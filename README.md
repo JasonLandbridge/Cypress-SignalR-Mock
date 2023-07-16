@@ -23,6 +23,7 @@ Easy way to publish messages from and to your SignalR hubs in Cypress E2E tests.
 - Multiple hubs can be mocked at the same time!
 - Provides mock support for all public HubConnection methods!
 - Small footprint, easy install and very human!
+- Also works for [Vitest](https://vitest.dev/) unit testing!
 
 ## Compatibility
 
@@ -61,17 +62,17 @@ pnpm add -D cypress-signalr-mock
 // 01. Import the plugin to where your signalR connections are created.
 import {useCypressSignalRMock} from 'cypress-signalr-mock';
 
-// 02. Call "useCypressSignalRMock" to create a mock for the SignalR hub connection, 
-// make sure to give it an unique hub name. It will return null when Cypress is not running.
-const progressHubConnection = useCypressSignalRMock('progress') ??
-    new HubConnectionBuilder().withUrl(`http://localhost:3000/progress`).build();
+// 02. Call "useCypressSignalRMock" to create a mock for the SignalR hub connection, make sure to give it an unique hub name. 
+// It will return null when Cypress is not running, and thus create the real SignalR connection.
+const hubConnection = useCypressSignalRMock('testHub') ??
+    new HubConnectionBuilder().withUrl(`http://localhost:3000/testhub`).build();
 
 // 03. Activate the plugin in your cypress/support/index.[js/ts] file.
 import 'cypress-signalr-mock';
 
 // 04. Use 'hubPublish()' in your E2E tests to publish messages as if it's the server.
 cy.hubPublish(
-    'progress', // The name of the hub
+    'testHub', // The name of the hub
     'hello-world', // The name of the message type
     {
         message: 'Hello World!', // The message payload
@@ -79,10 +80,28 @@ cy.hubPublish(
 );
 
 // 05. The listener will receive the message as normal.
-progressHubConnection.on('hello-world', (data) => {
+hubConnection.on('hello-world', (data) => {
     console.log(data); // { message: 'Hello World!' }
 });
 ```
+
+## `useCypressSignalRMock()` options
+
+- `debug` - Enable debug logging. Default: `false`
+
+```typescript
+useCypressSignalRMock("testHub", {
+    debug: true,
+});
+````
+
+- `enableForVitest` - Enable the plugin to also work for vitest unit testing. Default: `false`
+
+```typescript
+useCypressSignalRMock("testHub", {
+    enableForVitest: true,
+});
+````
 
 ## How does it work
 

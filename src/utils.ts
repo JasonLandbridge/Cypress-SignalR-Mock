@@ -52,3 +52,11 @@ export function isSSR(): boolean {
   }
   return false;
 }
+
+export function isInVitestMode(): boolean {
+  return (
+    typeof process !== "undefined" &&
+    process?.env?.hasOwnProperty("VITEST") &&
+    process.env.VITEST === "true"
+  );
+}

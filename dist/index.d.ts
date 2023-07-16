@@ -1,8 +1,9 @@
 import { HubConnection } from "@microsoft/signalr";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
-export declare function useCypressSignalRMock(name: string, { debug }?: Partial<{
+export declare function useCypressSignalRMock(name: string, { debug, enableForVitest, }?: Partial<{
     debug?: boolean;
+    enableForVitest?: boolean;
 }>): HubConnection | null;
 /**
  * Typings
@@ -38,3 +39,4 @@ declare global {
         }
     }
 }
+export { hubPublish, hubVerify, hubClear, hubPrintData, } from "./cypress-commands";
