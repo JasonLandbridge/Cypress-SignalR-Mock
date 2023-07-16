@@ -7,7 +7,11 @@ import HubConnectionMock from "./types/HubConnectionMock";
 import { setupCypressCommands } from "./cypress-commands";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
-import { getCypressSignalrMockData, isCypressRunning } from "./utils.ts";
+import {
+  getCypressSignalrMockData,
+  isCypressRunning,
+  isInVitestMode,
+} from "./utils.ts";
 import Log from "./log.ts";
 
 setupCypressCommands();
@@ -15,19 +19,26 @@ useCypressSignalRMock("default");
 
 export function useCypressSignalRMock(
   name: string,
-  { debug }: Partial<{ debug?: boolean }> = {}
+  {
+    debug,
+    enableForVitest,
+  }: Partial<{ debug?: boolean; enableForVitest?: boolean }> = {}
 ): HubConnection | null {
-  if (!isCypressRunning()) {
-    return null;
-  }
-
   if (debug) {
     Log.setLogLevel(4);
   }
+  if (!enableForVitest && isInVitestMode()) {
+    Log.info(
+      `Vitest is running but 'enableForVitest' is ${enableForVitest}, skip enabling CypressSignalRMock...`
+    );
+  }
 
-  const mock = new HubConnectionMock(name);
-  getCypressSignalrMockData().mocks.push(mock);
-  return <HubConnection>(mock as unknown);
+  if (isCypressRunning() || (enableForVitest && isInVitestMode())) {
+    const mock = new HubConnectionMock(name);
+    getCypressSignalrMockData().mocks.push(mock);
+    return <HubConnection>(mock as unknown);
+  }
+  return null;
 }
 
 /**
@@ -77,3 +88,10 @@ declare global {
     }
   }
 }
+
+export {
+  hubPublish,
+  hubVerify,
+  hubClear,
+  hubPrintData,
+} from "./cypress-commands";
