@@ -1,6 +1,5 @@
 import { vi, test, expect, describe } from "vitest";
-import { useCypressSignalRMock } from "../src";
-import { hubPublish } from "../src/cypress-commands";
+import { useCypressSignalRMock, hubPublish } from "../src";
 
 describe("cy.hubPublish() method", () => {
   test("Should receive value in SignalR listener when hubPublish() is called", () => {
