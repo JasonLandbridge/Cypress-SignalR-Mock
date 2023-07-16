@@ -3,7 +3,11 @@ name: Run Unit and Cypress Tests
 on:
   pull_request:
     branches: [ master ]
-
+    paths-ignore:
+      - '.github/**'
+      - '.idea/**'
+      - '.run/**'
+      - '.vscode/**'
 jobs:
   Testing:
     runs-on: ubuntu-latest
