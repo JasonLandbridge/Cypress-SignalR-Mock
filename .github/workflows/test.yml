@@ -27,12 +27,9 @@ jobs:
       - name: Execute Typechecking
         run: npm run type-check
 
-  Run-Cypress:
+  Run-Cypress-Tests:
     needs: [ UnitTests ]
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: playground/
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -41,3 +38,4 @@ jobs:
         with:
           build: npm run build
           start: npm run cypress:ci
+          working-directory: ./playground
