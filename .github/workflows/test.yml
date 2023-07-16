@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  UnitTests:
+  Testing:
     runs-on: ubuntu-latest
 
     strategy:
@@ -26,16 +26,10 @@ jobs:
         run: npm run test
       - name: Execute Typechecking
         run: npm run type-check
-
-  Run-Cypress-Tests:
-    needs: [ UnitTests ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          build: npm run build
+          build: npm ci && npm run build
           start: npm run cypress:ci
+          wait-on: 'http://localhost:3030'
           working-directory: ./playground
