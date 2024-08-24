@@ -102,7 +102,7 @@ function P(e, r) {
     0 <= t && e.splice(t, 1);
   }
 }
-var g = function() {
+var S = function() {
   function e(r) {
     this.initialTeardown = r, this.closed = !1, this._parentage = null, this._finalizers = null;
   }
@@ -192,9 +192,9 @@ var g = function() {
     var r = new e();
     return r.closed = !0, r;
   }(), e;
-}(), F = g.EMPTY;
+}(), F = S.EMPTY;
 function Y(e) {
-  return e instanceof g || e && "closed" in e && f(e.remove) && f(e.add) && f(e.unsubscribe);
+  return e instanceof S || e && "closed" in e && f(e.remove) && f(e.add) && f(e.unsubscribe);
 }
 function A(e) {
   f(e) ? e() : e.unsubscribe();
@@ -259,7 +259,7 @@ var q = function(e) {
       this.unsubscribe();
     }
   }, r;
-}(g), z = Function.prototype.bind;
+}(S), z = Function.prototype.bind;
 function E(e, r) {
   return z.call(e, r);
 }
@@ -484,7 +484,7 @@ var ur = H(function(e) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, r.prototype._innerSubscribe = function(t) {
     var n = this, o = this, i = o.hasError, s = o.isStopped, u = o.observers;
-    return i || s ? F : (this.currentObservers = null, u.push(t), new g(function() {
+    return i || s ? F : (this.currentObservers = null, u.push(t), new S(function() {
       n.currentObservers = null, P(u, t);
     }));
   }, r.prototype._checkFinalizedStatuses = function(t) {
@@ -715,8 +715,8 @@ class lr {
 function G() {
   return T() ? !1 : window.hasOwnProperty("Cypress");
 }
-function S() {
-  return !T() && window["cypress-signalr-mock"] ? window["cypress-signalr-mock"] : (J(), S());
+function g() {
+  return !T() && window["cypress-signalr-mock"] ? window["cypress-signalr-mock"] : (J(), g());
 }
 function fr(e) {
   T() || (window["cypress-signalr-mock"] = e);
@@ -730,7 +730,7 @@ function pr() {
   };
 }
 function K(e) {
-  return S().mocks.find((t) => t.name === e) ?? null;
+  return g().mocks.find((t) => t.name === e) ?? null;
 }
 function T() {
   return typeof window > "u" ? (c.error(
@@ -771,7 +771,7 @@ function dr(e, r, t) {
 function vr() {
   c.info(
     'Current window["cypress-signalr-mock"] data:',
-    S()
+    g()
   );
 }
 function yr() {
@@ -787,7 +787,7 @@ function _r(e, {
     `Vitest is running but 'enableForVitest' is ${t}, skip enabling CypressSignalRMock...`
   ), G() || t && V()) {
     const n = new lr(e);
-    return S().mocks.push(n), n;
+    return g().mocks.push(n), n;
   }
   return null;
 }

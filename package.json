@@ -40,7 +40,7 @@
     "dist"
   ],
   "dependencies": {
-    "@microsoft/signalr": ">=7.0.0",
+    "@microsoft/signalr": ">=8.0.0",
     "cypress": ">=10.0.0",
     "rxjs": ">=6.6.0 <8"
   },
