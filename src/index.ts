@@ -17,6 +17,13 @@ import Log from "./log.ts";
 setupCypressCommands();
 useCypressSignalRMock("default");
 
+/**
+ * Initializes a mock SignalR HubConnection when running in Cypress
+ * or when enableForVitest is true and running in Vitest
+ * @param name
+ * @param debug
+ * @param enableForVitest
+ */
 export function useCypressSignalRMock(
   name: string,
   {
