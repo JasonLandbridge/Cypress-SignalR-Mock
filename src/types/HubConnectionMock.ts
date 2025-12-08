@@ -18,7 +18,7 @@ export default class HubConnectionMock {
     this.name = name;
   }
 
-  public publish(messageType: string, value: any): void {
+  public publish(messageType: string, ...values: any[]): void {
     messageType = messageType.toLowerCase();
 
     const channels = this._hubConnectionData.filter(
@@ -32,7 +32,7 @@ export default class HubConnectionMock {
       `Publishing action: ${messageType} to ${channels.length} subscribers`
     );
     channels.forEach((x) => {
-      x.channel.next({ name: messageType, value });
+      x.channel.next({ name: messageType, values });
     });
   }
 
@@ -83,7 +83,7 @@ export default class HubConnectionMock {
 
     // Subscribe to the channel
     let subscription = connectionData.channel.subscribe((payload: IPayload) => {
-      newMethod(payload.value);
+      newMethod(...payload.values);
     });
 
     connectionData.subscriptions.push({

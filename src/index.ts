@@ -68,7 +68,7 @@ declare global {
       hubPublish(
         hubName: string,
         messageType: string,
-        payload: any
+        ...payload: any[]
       ): Chainable<Subject>;
 
       /**
