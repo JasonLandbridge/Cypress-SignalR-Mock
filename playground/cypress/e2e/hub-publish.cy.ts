@@ -15,4 +15,17 @@ describe("cy.hubPublish demo", () => {
       });
     });
   });
+
+  it("Should sending message whith multiple cy.hubPublish parameters", () => {
+    cy.visit("http://localhost:3030/");
+    cy.get('[data-cy="page-load-completed"]', { timeout: 10000 }).then(() => {
+      cy.hubPublish("demo-hub", "message", "info", "Info", "This is an info message");
+      cy.wait(500);
+      cy.get(".p-toast-message-info").should("exist").and("contain.text", "This is an info message").then(() => {
+        cy.hubPublish("demo-hub", "message", "error", "Error", "This is an error message");
+        cy.wait(500);
+        cy.get(".p-toast-message-error").should("exist").and("contain.text", "This is an error message")
+      });
+    });
+  });
 });
