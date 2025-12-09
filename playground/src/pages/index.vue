@@ -11,7 +11,7 @@ import { useCypressSignalRMock } from "../../../src";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import { onMounted, ref } from "vue";
 import Log from "consola";
-import { useToast } from "primevue/useToast";
+import { useToast } from "primevue/usetoast";
 
 const toast = useToast();
 const progressValue = ref(0);
