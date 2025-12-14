@@ -7,10 +7,13 @@ import { IStreamResult } from "@microsoft/signalr";
 export default class HubConnectionMock {
     private _hubConnectionData;
     private _serverInvokes;
+    private _invokeResponses;
     name: string;
     constructor(name: string);
     publish(messageType: string, ...values: any[]): void;
     verify(messageType: string, callback?: (invokes: IServerInvoke[]) => void): void;
+    mockInvoke(methodName: string, payload: any): void;
+    unmockInvoke(methodName: string): void;
     /** Registers a handler that will be invoked when the hub method with the specified method name is invoked.
      *
      * @param {string} methodName The name of the hub method to define.

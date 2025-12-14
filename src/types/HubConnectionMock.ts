@@ -12,6 +12,7 @@ import { IStreamResult, Subject as SignalrSubject } from "@microsoft/signalr";
 export default class HubConnectionMock {
   private _hubConnectionData: IHubConnectionData[] = [];
   private _serverInvokes: IServerInvoke[] = [];
+  private _invokeResponses: { [key: string]: any } = {};
   public name: string;
 
   constructor(name: string) {
@@ -49,6 +50,14 @@ export default class HubConnectionMock {
     if (callback) {
       callback(currentInvokes);
     }
+  }
+
+  public mockInvoke(methodName: string, payload: any) {
+    this._invokeResponses[methodName] = payload;
+  }
+
+  public unmockInvoke(methodName: string) {
+    delete this._invokeResponses[methodName];
   }
 
   // region Native SignalR methods
@@ -151,7 +160,12 @@ export default class HubConnectionMock {
         action: methodName,
         args,
       });
-      resolve(0 as any);
+      const mockedResponse = this._invokeResponses[methodName];
+      if(mockedResponse !== undefined){
+        resolve(mockedResponse as T);
+      } else {
+        resolve(0 as any);
+      }
     });
   }
 

@@ -97,7 +97,9 @@ declare global {
 }
 
 export {
+  hubMockInvoke,
   hubPublish,
+  hubUnmockInvoke,
   hubVerify,
   hubClear,
   hubPrintData,
