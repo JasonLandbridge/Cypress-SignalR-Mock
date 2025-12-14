@@ -9,7 +9,7 @@ export default class HubConnectionMock {
     private _serverInvokes;
     name: string;
     constructor(name: string);
-    publish(messageType: string, value: any): void;
+    publish(messageType: string, ...values: any[]): void;
     verify(messageType: string, callback?: (invokes: IServerInvoke[]) => void): void;
     /** Registers a handler that will be invoked when the hub method with the specified method name is invoked.
      *

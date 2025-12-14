@@ -553,7 +553,7 @@ class lr {
     p(this, "name");
     this.name = r;
   }
-  publish(r, t) {
+  publish(r, ...t) {
     r = r.toLowerCase();
     const n = this._hubConnectionData.filter(
       (o) => o.messageType === r
@@ -565,7 +565,7 @@ class lr {
     c.debug(
       `Publishing action: ${r} to ${n.length} subscribers`
     ), n.forEach((o) => {
-      o.channel.next({ name: r, value: t });
+      o.channel.next({ name: r, values: t });
     });
   }
   verify(r, t) {
@@ -588,7 +588,7 @@ class lr {
     if (!n)
       throw new Error(`Could not find connection data for ${r}`);
     let o = n.channel.subscribe((i) => {
-      t(i.value);
+      t(...i.values);
     });
     n.subscriptions.push({
       handler: t,
@@ -750,13 +750,13 @@ function hr() {
   const e = window.Cypress;
   e.Commands.add("hubPublish", br), e.Commands.add("hubVerifyInvokes", dr), e.Commands.add("hubClear", yr), e.Commands.add("hubPrintData", vr);
 }
-function br(e, r, t) {
+function br(e, r, ...t) {
   const n = K(e);
   if (!n) {
     c.error(`[cy.hubPublish] - HubConnectionMock not found for ${e}`);
     return;
   }
-  n.publish(r, t);
+  n.publish(r, ...t);
 }
 function dr(e, r, t) {
   const n = K(e);
