@@ -1,6 +1,13 @@
 import { HubConnection } from "@microsoft/signalr";
 import IMockData from "./types/IMockData";
 import IServerInvoke from "./types/IServerInvoke";
+/**
+ * Initializes a mock SignalR HubConnection when running in Cypress
+ * or when enableForVitest is true and running in Vitest
+ * @param name
+ * @param debug
+ * @param enableForVitest
+ */
 export declare function useCypressSignalRMock(name: string, { debug, enableForVitest, }?: Partial<{
     debug?: boolean;
     enableForVitest?: boolean;
@@ -20,7 +27,7 @@ declare global {
              * @param messageType The name of the message type
              * @param payload The payload to send with the action
              */
-            hubPublish(hubName: string, messageType: string, payload: any): Chainable<Subject>;
+            hubPublish(hubName: string, messageType: string, ...payload: any[]): Chainable<Subject>;
             /**
              * Verifies that a message was sent from the Client => Server
              * @param hubName The name of the hub

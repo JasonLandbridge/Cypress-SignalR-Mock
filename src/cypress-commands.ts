@@ -26,13 +26,13 @@ export function setupCypressCommands() {
   cypress.Commands.add("hubPrintData", hubPrintData);
 }
 
-export function hubPublish(hubName: string, messageType: string, payload: any) {
+export function hubPublish(hubName: string, messageType: string, ...payload: any[]) {
   const hubConnectionMock = getHubConnectionMock(hubName);
   if (!hubConnectionMock) {
     Log.error(`[cy.hubPublish] - HubConnectionMock not found for ${hubName}`);
     return;
   }
-  hubConnectionMock.publish(messageType, payload);
+  hubConnectionMock.publish(messageType, ...payload);
 }
 
 export function hubVerify(
