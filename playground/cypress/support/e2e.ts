@@ -18,3 +18,11 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Ignore ResizeObserver loop errors - these are benign browser notifications
+// that shouldn't fail tests
+Cypress.on('uncaught:exception', (err) => {
+  if (err.message.includes('ResizeObserver loop')) {
+    return false
+  }
+})
