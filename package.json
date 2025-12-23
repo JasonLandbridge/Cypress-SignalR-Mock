@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JasonLandbridge/cypress-signalr-mock.git"
+    "url": "https://github.com/JasonLandbridge/Cypress-SignalR-Mock.git"
   },
   "keywords": [
     "SignalR",
@@ -24,9 +24,9 @@
     "cypress-plugin"
   ],
   "bugs": {
-    "url": "https://github.com/JasonLandbridge/cypress-signalr-mock/issues"
+    "url": "https://github.com/JasonLandbridge/Cypress-SignalR-Mock/issues"
   },
-  "homepage": "https://github.com/JasonLandbridge/cypress-signalr-mock#readme",
+  "homepage": "https://github.com/JasonLandbridge/Cypress-SignalR-Mock#readme",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
