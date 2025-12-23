@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write # Required for OIDC
+  id-token: write # Required for OIDC trusted publishing
   contents: write # to be able to publish a GitHub release
   issues: write # to be able to comment on released issues
   pull-requests: write # to be able to comment on released pull requests
@@ -27,7 +27,6 @@ jobs:
         run: npm run build
       - name: NPM and GitHub Release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_AUTHOR_NAME: ${{ vars.GIT_AUTHOR_NAME }}
           GIT_AUTHOR_EMAIL: ${{ vars.GIT_AUTHOR_EMAIL }}
