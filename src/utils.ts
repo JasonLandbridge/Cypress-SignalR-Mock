@@ -6,6 +6,15 @@ export function isCypressRunning(): boolean {
   if (isSSR()) {
     return false;
   }
+
+  // Cypress's Test Replay data capture sets a default Cypress property on window
+  // for all iframes, which allows window.Cypress to be overridden. However, even
+  // with this property present, window.Cypress may remain undefined.
+  //
+  // We use !! to ensure we return true only if window.Cypress is truly defined,
+  // rather than relying solely on the presence of the property. This prevents
+  // runtime errors when the property exists but is actually undefined.
+  // @ts-ignore - Cypress is not defined in the type system
   return !!window["Cypress"];
 }
 
@@ -36,7 +45,7 @@ export function defaultCypressSignalrMockData(): IMockData {
 }
 
 export function getHubConnectionMock(
-  hubName: string
+  hubName: string,
 ): HubConnectionMock | null {
   const data = getCypressSignalrMockData();
   return data.mocks.find((x) => x.name === hubName) ?? null;
@@ -46,7 +55,7 @@ export function isSSR(): boolean {
   if (typeof window === "undefined") {
     Log.error(
       "window is not defined. This most likely happens during SSR, which is not supported",
-      false
+      false,
     );
     return true;
   }
