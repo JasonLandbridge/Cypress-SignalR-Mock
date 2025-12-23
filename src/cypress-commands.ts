@@ -17,6 +17,10 @@ export function setupCypressCommands() {
   // @ts-ignore
   const cypress = window.Cypress;
 
+  cypress.Commands.add("hubMockInvoke", hubMockInvoke);
+
+  cypress.Commands.add("hubUnmockInvoke", hubUnmockInvoke);
+
   cypress.Commands.add("hubPublish", hubPublish);
 
   cypress.Commands.add("hubVerifyInvokes", hubVerify);
@@ -24,6 +28,24 @@ export function setupCypressCommands() {
   cypress.Commands.add("hubClear", hubClear);
 
   cypress.Commands.add("hubPrintData", hubPrintData);
+}
+
+export function hubMockInvoke(hubName: string, methodName: string, payload: any) {
+  const hubConnectionMock = getHubConnectionMock(hubName);
+  if (!hubConnectionMock) {
+    Log.error(`[cy.hubMockInvoke] - HubConnectionMock not found for ${hubName}`);
+    return;
+  }
+  hubConnectionMock.mockInvoke(methodName, payload);
+}
+
+export function hubUnmockInvoke(hubName: string, methodName: string) {
+  const hubConnectionMock = getHubConnectionMock(hubName);
+  if (!hubConnectionMock) {
+    Log.error(`[cy.hubUnmockInvoke] - HubConnectionMock not found for ${hubName}`);
+    return;
+  }
+  hubConnectionMock.unmockInvoke(methodName);
 }
 
 export function hubPublish(hubName: string, messageType: string, ...payload: any[]) {

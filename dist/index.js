@@ -1,7 +1,7 @@
 var W = Object.defineProperty;
 var X = (e, r, t) => r in e ? W(e, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : e[r] = t;
 var p = (e, r, t) => (X(e, typeof r != "symbol" ? r + "" : r, t), t);
-class c {
+class u {
   static debug(r) {
     this._logLevel >= 4 && console.debug(this._prefix + r);
   }
@@ -22,25 +22,25 @@ class c {
     this._logLevel = r;
   }
 }
-p(c, "_prefix", "[Cypress-SignalR-Mock] - "), p(c, "_logLevel", 3);
-var k = function(e, r) {
-  return k = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, n) {
+p(u, "_prefix", "[Cypress-SignalR-Mock] - "), p(u, "_logLevel", 3);
+var x = function(e, r) {
+  return x = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, n) {
     t.__proto__ = n;
   } || function(t, n) {
     for (var o in n)
       Object.prototype.hasOwnProperty.call(n, o) && (t[o] = n[o]);
-  }, k(e, r);
+  }, x(e, r);
 };
-function w(e, r) {
+function m(e, r) {
   if (typeof r != "function" && r !== null)
     throw new TypeError("Class extends value " + String(r) + " is not a constructor or null");
-  k(e, r);
+  x(e, r);
   function t() {
     this.constructor = e;
   }
   e.prototype = r === null ? Object.create(r) : (t.prototype = r.prototype, new t());
 }
-function x(e) {
+function P(e) {
   var r = typeof Symbol == "function" && Symbol.iterator, t = r && e[r], n = 0;
   if (t)
     return t.call(e);
@@ -60,8 +60,8 @@ function y(e, r) {
   try {
     for (; (r === void 0 || r-- > 0) && !(o = n.next()).done; )
       i.push(o.value);
-  } catch (u) {
-    s = { error: u };
+  } catch (c) {
+    s = { error: c };
   } finally {
     try {
       o && !o.done && (t = n.return) && t.call(n);
@@ -81,13 +81,13 @@ function _(e, r, t) {
 function f(e) {
   return typeof e == "function";
 }
-function H(e) {
+function F(e) {
   var r = function(n) {
     Error.call(n), n.stack = new Error().stack;
   }, t = e(r);
   return t.prototype = Object.create(Error.prototype), t.prototype.constructor = t, t;
 }
-var C = H(function(e) {
+var C = F(function(e) {
   return function(t) {
     e(this), this.message = t ? t.length + ` errors occurred during unsubscription:
 ` + t.map(function(n, o) {
@@ -96,13 +96,13 @@ var C = H(function(e) {
   `) : "", this.name = "UnsubscriptionError", this.errors = t;
   };
 });
-function P(e, r) {
+function I(e, r) {
   if (e) {
     var t = e.indexOf(r);
     0 <= t && e.splice(t, 1);
   }
 }
-var g = function() {
+var w = function() {
   function e(r) {
     this.initialTeardown = r, this.closed = !1, this._parentage = null, this._finalizers = null;
   }
@@ -114,15 +114,15 @@ var g = function() {
       if (s)
         if (this._parentage = null, Array.isArray(s))
           try {
-            for (var u = x(s), a = u.next(); !a.done; a = u.next()) {
-              var m = a.value;
-              m.remove(this);
+            for (var c = P(s), a = c.next(); !a.done; a = c.next()) {
+              var k = a.value;
+              k.remove(this);
             }
           } catch (l) {
             r = { error: l };
           } finally {
             try {
-              a && !a.done && (t = u.return) && t.call(u);
+              a && !a.done && (t = c.return) && t.call(c);
             } finally {
               if (r)
                 throw r.error;
@@ -130,21 +130,21 @@ var g = function() {
           }
         else
           s.remove(this);
-      var I = this.initialTeardown;
-      if (f(I))
+      var T = this.initialTeardown;
+      if (f(T))
         try {
-          I();
+          T();
         } catch (l) {
           i = l instanceof C ? l.errors : [l];
         }
-      var M = this._finalizers;
-      if (M) {
+      var A = this._finalizers;
+      if (A) {
         this._finalizers = null;
         try {
-          for (var b = x(M), h = b.next(); !h.done; h = b.next()) {
+          for (var b = P(A), h = b.next(); !h.done; h = b.next()) {
             var Q = h.value;
             try {
-              A(Q);
+              R(Q);
             } catch (l) {
               i = i ?? [], l instanceof C ? i = _(_([], y(i)), y(l.errors)) : i.push(l);
             }
@@ -167,7 +167,7 @@ var g = function() {
     var t;
     if (r && r !== this)
       if (this.closed)
-        A(r);
+        R(r);
       else {
         if (r instanceof e) {
           if (r.closed || r._hasParent(this))
@@ -184,22 +184,22 @@ var g = function() {
     this._parentage = Array.isArray(t) ? (t.push(r), t) : t ? [t, r] : r;
   }, e.prototype._removeParent = function(r) {
     var t = this._parentage;
-    t === r ? this._parentage = null : Array.isArray(t) && P(t, r);
+    t === r ? this._parentage = null : Array.isArray(t) && I(t, r);
   }, e.prototype.remove = function(r) {
     var t = this._finalizers;
-    t && P(t, r), r instanceof e && r._removeParent(this);
+    t && I(t, r), r instanceof e && r._removeParent(this);
   }, e.EMPTY = function() {
     var r = new e();
     return r.closed = !0, r;
   }(), e;
-}(), F = g.EMPTY;
-function Y(e) {
-  return e instanceof g || e && "closed" in e && f(e.remove) && f(e.add) && f(e.unsubscribe);
+}(), Y = w.EMPTY;
+function B(e) {
+  return e instanceof w || e && "closed" in e && f(e.remove) && f(e.add) && f(e.unsubscribe);
 }
-function A(e) {
+function R(e) {
   f(e) ? e() : e.unsubscribe();
 }
-var B = {
+var q = {
   onUnhandledError: null,
   onStoppedNotification: null,
   Promise: void 0,
@@ -228,11 +228,11 @@ function L() {
 function v(e) {
   e();
 }
-var q = function(e) {
-  w(r, e);
+var G = function(e) {
+  m(r, e);
   function r(t) {
     var n = e.call(this) || this;
-    return n.isStopped = !1, t ? (n.destination = t, Y(t) && t.add(n)) : n.destination = tr, n;
+    return n.isStopped = !1, t ? (n.destination = t, B(t) && t.add(n)) : n.destination = tr, n;
   }
   return r.create = function(t, n, o) {
     return new D(t, n, o);
@@ -259,7 +259,7 @@ var q = function(e) {
       this.unsubscribe();
     }
   }, r;
-}(g), z = Function.prototype.bind;
+}(w), z = Function.prototype.bind;
 function E(e, r) {
   return z.call(e, r);
 }
@@ -295,7 +295,7 @@ var N = function() {
       }
   }, e;
 }(), D = function(e) {
-  w(r, e);
+  m(r, e);
   function r(t, n, o) {
     var i = e.call(this) || this, s;
     if (f(t) || !t)
@@ -305,19 +305,19 @@ var N = function() {
         complete: o ?? void 0
       };
     else {
-      var u;
-      i && B.useDeprecatedNextContext ? (u = Object.create(t), u.unsubscribe = function() {
+      var c;
+      i && q.useDeprecatedNextContext ? (c = Object.create(t), c.unsubscribe = function() {
         return i.unsubscribe();
       }, s = {
-        next: t.next && E(t.next, u),
-        error: t.error && E(t.error, u),
-        complete: t.complete && E(t.complete, u)
+        next: t.next && E(t.next, c),
+        error: t.error && E(t.error, c),
+        complete: t.complete && E(t.complete, c)
       }) : s = t;
     }
     return i.destination = new N(s), i;
   }
   return r;
-}(q);
+}(G);
 function d(e) {
   Z(e);
 }
@@ -342,7 +342,7 @@ function or(e) {
     }, t);
   };
 }
-var $ = function() {
+var U = function() {
   function e(r) {
     r && (this._subscribe = r);
   }
@@ -352,8 +352,8 @@ var $ = function() {
   }, e.prototype.subscribe = function(r, t, n) {
     var o = this, i = sr(r) ? r : new D(r, t, n);
     return v(function() {
-      var s = o, u = s.operator, a = s.source;
-      i.add(u ? u.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
+      var s = o, c = s.operator, a = s.source;
+      i.add(c ? c.call(i, a) : a ? o._subscribe(i) : o._trySubscribe(i));
     }), i;
   }, e.prototype._trySubscribe = function(r) {
     try {
@@ -363,11 +363,11 @@ var $ = function() {
     }
   }, e.prototype.forEach = function(r, t) {
     var n = this;
-    return t = R(t), new t(function(o, i) {
+    return t = $(t), new t(function(o, i) {
       var s = new D({
-        next: function(u) {
+        next: function(c) {
           try {
-            r(u);
+            r(c);
           } catch (a) {
             i(a), s.unsubscribe();
           }
@@ -388,7 +388,7 @@ var $ = function() {
     return or(r)(this);
   }, e.prototype.toPromise = function(r) {
     var t = this;
-    return r = R(r), new r(function(n, o) {
+    return r = $(r), new r(function(n, o) {
       var i;
       t.subscribe(function(s) {
         return i = s;
@@ -402,32 +402,32 @@ var $ = function() {
     return new e(r);
   }, e;
 }();
-function R(e) {
+function $(e) {
   var r;
-  return (r = e ?? B.Promise) !== null && r !== void 0 ? r : Promise;
+  return (r = e ?? q.Promise) !== null && r !== void 0 ? r : Promise;
 }
 function ir(e) {
   return e && f(e.next) && f(e.error) && f(e.complete);
 }
 function sr(e) {
-  return e && e instanceof q || ir(e) && Y(e);
+  return e && e instanceof G || ir(e) && B(e);
 }
-var ur = H(function(e) {
+var cr = F(function(e) {
   return function() {
     e(this), this.name = "ObjectUnsubscribedError", this.message = "object unsubscribed";
   };
 }), O = function(e) {
-  w(r, e);
+  m(r, e);
   function r() {
     var t = e.call(this) || this;
     return t.closed = !1, t.currentObservers = null, t.observers = [], t.isStopped = !1, t.hasError = !1, t.thrownError = null, t;
   }
   return r.prototype.lift = function(t) {
-    var n = new U(this, this);
+    var n = new H(this, this);
     return n.operator = t, n;
   }, r.prototype._throwIfClosed = function() {
     if (this.closed)
-      throw new ur();
+      throw new cr();
   }, r.prototype.next = function(t) {
     var n = this;
     v(function() {
@@ -435,15 +435,15 @@ var ur = H(function(e) {
       if (n._throwIfClosed(), !n.isStopped) {
         n.currentObservers || (n.currentObservers = Array.from(n.observers));
         try {
-          for (var s = x(n.currentObservers), u = s.next(); !u.done; u = s.next()) {
-            var a = u.value;
+          for (var s = P(n.currentObservers), c = s.next(); !c.done; c = s.next()) {
+            var a = c.value;
             a.next(t);
           }
-        } catch (m) {
-          o = { error: m };
+        } catch (k) {
+          o = { error: k };
         } finally {
           try {
-            u && !u.done && (i = s.return) && i.call(s);
+            c && !c.done && (i = s.return) && i.call(s);
           } finally {
             if (o)
               throw o.error;
@@ -483,21 +483,21 @@ var ur = H(function(e) {
   }, r.prototype._subscribe = function(t) {
     return this._throwIfClosed(), this._checkFinalizedStatuses(t), this._innerSubscribe(t);
   }, r.prototype._innerSubscribe = function(t) {
-    var n = this, o = this, i = o.hasError, s = o.isStopped, u = o.observers;
-    return i || s ? F : (this.currentObservers = null, u.push(t), new g(function() {
-      n.currentObservers = null, P(u, t);
+    var n = this, o = this, i = o.hasError, s = o.isStopped, c = o.observers;
+    return i || s ? Y : (this.currentObservers = null, c.push(t), new w(function() {
+      n.currentObservers = null, I(c, t);
     }));
   }, r.prototype._checkFinalizedStatuses = function(t) {
     var n = this, o = n.hasError, i = n.thrownError, s = n.isStopped;
     o ? t.error(i) : s && t.complete();
   }, r.prototype.asObservable = function() {
-    var t = new $();
+    var t = new U();
     return t.source = this, t;
   }, r.create = function(t, n) {
-    return new U(t, n);
+    return new H(t, n);
   }, r;
-}($), U = function(e) {
-  w(r, e);
+}(U), H = function(e) {
+  m(r, e);
   function r(t, n) {
     var o = e.call(this) || this;
     return o.destination = t, o.source = n, o;
@@ -513,10 +513,10 @@ var ur = H(function(e) {
     (n = (t = this.destination) === null || t === void 0 ? void 0 : t.complete) === null || n === void 0 || n.call(t);
   }, r.prototype._subscribe = function(t) {
     var n, o;
-    return (o = (n = this.source) === null || n === void 0 ? void 0 : n.subscribe(t)) !== null && o !== void 0 ? o : F;
+    return (o = (n = this.source) === null || n === void 0 ? void 0 : n.subscribe(t)) !== null && o !== void 0 ? o : Y;
   }, r;
 }(O);
-class cr {
+class ur {
   constructor(r, t) {
     this._subject = r, this._observer = t;
   }
@@ -543,13 +543,14 @@ class ar {
       r.complete && r.complete();
   }
   subscribe(r) {
-    return this.observers.push(r), new cr(this, r);
+    return this.observers.push(r), new ur(this, r);
   }
 }
 class lr {
   constructor(r) {
     p(this, "_hubConnectionData", []);
     p(this, "_serverInvokes", []);
+    p(this, "_invokeResponses", {});
     p(this, "name");
     this.name = r;
   }
@@ -559,10 +560,10 @@ class lr {
       (o) => o.messageType === r
     );
     if (n.length === 0) {
-      c.warn(`No subscribers for ${r}`);
+      u.warn(`No subscribers for ${r}`);
       return;
     }
-    c.debug(
+    u.debug(
       `Publishing action: ${r} to ${n.length} subscribers`
     ), n.forEach((o) => {
       o.channel.next({ name: r, values: t });
@@ -574,6 +575,12 @@ class lr {
       (o) => o.action === r
     );
     t && t(n);
+  }
+  mockInvoke(r, t) {
+    this._invokeResponses[r] = t;
+  }
+  unmockInvoke(r) {
+    delete this._invokeResponses[r];
   }
   on(r, t) {
     r = r.toLowerCase(), this._hubConnectionData.some((i) => i.messageType === r) || this._hubConnectionData.push({
@@ -638,7 +645,9 @@ class lr {
       this._serverInvokes.push({
         action: r,
         args: t
-      }), n(0);
+      });
+      const o = this._invokeResponses[r];
+      n(o !== void 0 ? o : 0);
     });
   }
   off(r, t) {
@@ -647,13 +656,13 @@ class lr {
       (o) => o.messageType === r
     );
     if (n == -1) {
-      c.warn(`No channels registered for action name: ${r}`);
+      u.warn(`No channels registered for action name: ${r}`);
       return;
     }
     if (t) {
       const o = this._hubConnectionData[n].subscriptions.findIndex((i) => i.handler === t);
       if (o == -1) {
-        c.warn(
+        u.warn(
           `Could not find the handler to delete for action name: ${r}`
         );
         return;
@@ -712,16 +721,16 @@ class lr {
   }
   // endregion
 }
-function G() {
-  return T() ? !1 : window.hasOwnProperty("Cypress");
+function J() {
+  return M() ? !1 : window.hasOwnProperty("Cypress");
 }
-function S() {
-  return !T() && window["cypress-signalr-mock"] ? window["cypress-signalr-mock"] : (J(), S());
+function g() {
+  return !M() && window["cypress-signalr-mock"] ? window["cypress-signalr-mock"] : (K(), g());
 }
 function fr(e) {
-  T() || (window["cypress-signalr-mock"] = e);
+  M() || (window["cypress-signalr-mock"] = e);
 }
-function J() {
+function K() {
   fr(pr());
 }
 function pr() {
@@ -729,11 +738,11 @@ function pr() {
     mocks: []
   };
 }
-function K(e) {
-  return S().mocks.find((t) => t.name === e) ?? null;
+function S(e) {
+  return g().mocks.find((t) => t.name === e) ?? null;
 }
-function T() {
-  return typeof window > "u" ? (c.error(
+function M() {
+  return typeof window > "u" ? (u.error(
     "window is not defined. This most likely happens during SSR, which is not supported",
     !1
   ), !0) : !1;
@@ -743,59 +752,77 @@ function V() {
   return typeof process < "u" && ((e = process == null ? void 0 : process.env) == null ? void 0 : e.hasOwnProperty("VITEST")) && process.env.VITEST === "true";
 }
 function hr() {
-  if (!G()) {
-    c.debug("Cypress is not running, skipping setup of Cypress commands");
+  if (!J()) {
+    u.debug("Cypress is not running, skipping setup of Cypress commands");
     return;
   }
   const e = window.Cypress;
-  e.Commands.add("hubPublish", br), e.Commands.add("hubVerifyInvokes", dr), e.Commands.add("hubClear", yr), e.Commands.add("hubPrintData", vr);
+  e.Commands.add("hubMockInvoke", br), e.Commands.add("hubUnmockInvoke", dr), e.Commands.add("hubPublish", vr), e.Commands.add("hubVerifyInvokes", yr), e.Commands.add("hubClear", mr), e.Commands.add("hubPrintData", _r);
 }
-function br(e, r, ...t) {
-  const n = K(e);
+function br(e, r, t) {
+  const n = S(e);
   if (!n) {
-    c.error(`[cy.hubPublish] - HubConnectionMock not found for ${e}`);
+    u.error(`[cy.hubMockInvoke] - HubConnectionMock not found for ${e}`);
+    return;
+  }
+  n.mockInvoke(r, t);
+}
+function dr(e, r) {
+  const t = S(e);
+  if (!t) {
+    u.error(`[cy.hubUnmockInvoke] - HubConnectionMock not found for ${e}`);
+    return;
+  }
+  t.unmockInvoke(r);
+}
+function vr(e, r, ...t) {
+  const n = S(e);
+  if (!n) {
+    u.error(`[cy.hubPublish] - HubConnectionMock not found for ${e}`);
     return;
   }
   n.publish(r, ...t);
 }
-function dr(e, r, t) {
-  const n = K(e);
+function yr(e, r, t) {
+  const n = S(e);
   if (!n) {
-    c.error(
+    u.error(
       `[cy.hubVerify] - HubConnectionMock not found for hub with name: ${e}`
     );
     return;
   }
   n.verify(r, t);
 }
-function vr() {
-  c.info(
+function _r() {
+  u.info(
     'Current window["cypress-signalr-mock"] data:',
-    S()
+    g()
   );
 }
-function yr() {
-  J();
+function mr() {
+  K();
 }
 hr();
-_r("default");
-function _r(e, {
+wr("default");
+function wr(e, {
   debug: r,
   enableForVitest: t
 } = {}) {
-  if (r && c.setLogLevel(4), !t && V() && c.info(
+  if (r && u.setLogLevel(4), !t && V() && u.info(
     `Vitest is running but 'enableForVitest' is ${t}, skip enabling CypressSignalRMock...`
-  ), G() || t && V()) {
+  ), J() || t && V()) {
     const n = new lr(e);
-    return S().mocks.push(n), n;
+    return g().mocks.push(n), n;
   }
   return null;
 }
 export {
-  yr as hubClear,
-  vr as hubPrintData,
-  br as hubPublish,
-  dr as hubVerify,
-  _r as useCypressSignalRMock
+  mr as hubClear,
+  br as hubMockInvoke,
+  _r as hubPrintData,
+  vr as hubPublish,
+  dr as hubUnmockInvoke,
+  yr as hubVerify,
+  wr as useCypressSignalRMock
 };
 //# sourceMappingURL=index.js.map
