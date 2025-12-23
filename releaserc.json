@@ -38,7 +38,12 @@
         "changelogTitle": "Cypress SignalR Mock"
       }
     ],
-    "@semantic-release/npm",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "."
+      }
+    ],
     [
       "@semantic-release/git",
       {
@@ -57,5 +62,19 @@
         "failComment": false
       }
     ]
+  ],
+  "verifyConditions": [
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@semantic-release/github"
+  ],
+  "prepare": [
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    "@semantic-release/github"
   ]
 }
