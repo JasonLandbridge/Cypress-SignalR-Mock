@@ -6,7 +6,7 @@ describe("cy.hubPublish() method", () => {
     vi.stubGlobal("Cypress", {});
 
     let publishResult = null;
-    useCypressSignalRMock("testHub").on("test", (value) => {
+    useCypressSignalRMock("testHub")!.on("test", (value) => {
       publishResult = value;
     });
 
@@ -20,7 +20,7 @@ describe("cy.hubPublish() method", () => {
     let value1Result = null;
     let value2Result = null;
     let value3Result = null;
-    useCypressSignalRMock("testHub2").on("testMultiple", (value1, value2, value3) => {
+    useCypressSignalRMock("testHub2")!.on("testMultiple", (value1, value2, value3) => {
       value1Result = value1;
       value2Result = value2;
       value3Result = value3;

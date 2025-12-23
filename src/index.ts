@@ -26,11 +26,9 @@ useCypressSignalRMock("default");
  */
 export function useCypressSignalRMock(
   name: string,
-  {
-    debug,
-    enableForVitest,
-  }: Partial<{ debug?: boolean; enableForVitest?: boolean }> = {}
+  options?: { debug?: boolean; enableForVitest?: boolean }
 ): HubConnection | null {
+  const { debug, enableForVitest } = options ?? {};
   if (debug) {
     Log.setLogLevel(4);
   }
