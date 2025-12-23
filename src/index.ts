@@ -36,7 +36,7 @@ export function useCypressSignalRMock(
   }
   if (!enableForVitest && isInVitestMode()) {
     Log.info(
-      `Vitest is running but 'enableForVitest' is ${enableForVitest}, skip enabling CypressSignalRMock...`
+      `Vitest detected. To enable CypressSignalRMock in Vitest, pass { enableForVitest: true } to useCypressSignalRMock(). Skipping...`
     );
   }
 

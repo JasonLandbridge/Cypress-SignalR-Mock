@@ -8,9 +8,13 @@ export default class Log {
     }
   }
 
-  public static info(message: string, value: any = undefined) {
+  public static info(message: string, value?: any) {
     if (this._logLevel >= 3) {
-      console.info(this._prefix + message, value);
+      if (value !== undefined) {
+        console.info(this._prefix + message, value);
+      } else {
+        console.info(this._prefix + message);
+      }
     }
   }
 
