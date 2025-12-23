@@ -6,7 +6,7 @@ export function isCypressRunning(): boolean {
   if (isSSR()) {
     return false;
   }
-  return window.hasOwnProperty("Cypress");
+  return !!window["Cypress"];
 }
 
 export function getCypressSignalrMockData(): IMockData {
